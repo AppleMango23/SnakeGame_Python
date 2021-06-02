@@ -15,15 +15,19 @@ dis_width=1000
 dis_height=600
 
 dis=pygame.display.set_mode((dis_width,dis_height))
-pygame.display.set_caption('Snake game by Edureka!!')
+pygame.display.set_caption('Snake game by Noahhh!!')
 
 clock=pygame.time.Clock()
 
 snake_block=10
-snake_speed=40                 #Spped of snake
+snake_speed=15                 #Speed of snake
 
 font_style=pygame.font.SysFont("bahnschrift",25)
 score_font = pygame.font.SysFont("comicsansms",35)
+
+def Your_score(score):
+    value = score_font.render("Your Score: " + str(score), True, yellow)
+    dis.blit(value,[0,0])
 
 def our_snake(snake_block, snake_list):
     for x in snake_list:
@@ -34,6 +38,8 @@ def message(msg, color):
     dis.blit(mesg,[dis_width/6, dis_height/3])
 
 def gameLoop():
+    global snake_speed
+
     game_over=False
     game_close=False
 
@@ -100,6 +106,7 @@ def gameLoop():
                 game_close=True
         
         our_snake(snake_block,snake_List)
+        Your_score(Length_of_snake - 1)
 
         pygame.display.update()
 
@@ -108,6 +115,7 @@ def gameLoop():
             foody = round(random.randrange(0,dis_height - snake_block) / 10.0) * 10.0
             Length_of_snake+=1
             print("Yummy!!!!")
+            snake_speed=snake_speed+5
         clock.tick(snake_speed)
 
     pygame.quit()
